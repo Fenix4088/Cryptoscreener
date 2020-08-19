@@ -1,0 +1,75 @@
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+*::selection {
+ 
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h1 {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    @include main-font;
+}
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+button, input {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+textarea {
+    resize: none;
+}
+
+// Base styles
+.container {
+    border: 1px solid red;
+    padding: 0 15px;
+    margin: 0 auto;
+    min-width: 290px;
+
+    @media (min-width: 768px) {
+        min-width: 708px;
+    }
+    
+    @media (min-width: 1200px) {
+        padding: 0 20px;
+        max-width: 1140px;
+    }
+}

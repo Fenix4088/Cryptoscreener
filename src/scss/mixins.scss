@@ -1,0 +1,40 @@
+@mixin main-font {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+@mixin header-info-text($color) {
+    font-size: 11px;
+    font-weight: 500;
+    color: $color;
+}
+
+@mixin header-nav-text($color) {
+    font-weight: 600;
+    color: $color;
+}
+
+@mixin logo-style {
+    font-family: 'Bangers', cursive;
+    font-size: 25px;
+    font-weight: 400;
+}
+
+// Common mixins
+@mixin flex-all-center {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+// Hovers
+@mixin social-icons-hover($color) {
+    transition: all .2s ease-in;
+    color: $color;
+    &:hover {
+        transform: rotateX(360deg);
+
+    }
+}
+
