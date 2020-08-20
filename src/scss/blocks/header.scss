@@ -102,6 +102,24 @@
 }
 
 .header__nav-actions-search {
+    padding: 12px;
+    width: 171px;
+    height: 36px;
+    font-size: 12px;
+    background-color: #ebeff2;
+    border: 2px solid #ebeff2;
+    border-radius: 5px;
+}
+
+.header__nav-actions-input-group {
+    position: relative;
+}
+
+.header__nav-actions-search-icon {
+    position: absolute;
+    top: 50%;
+    // right: 50%;
+    transform: translate(-150%, -50%);
 }
 
 .header__nav-actions-login {
