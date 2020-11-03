@@ -86,7 +86,7 @@
 
 .header__nav-menu {
     margin-left: 30px;
-    @include flex-all-center;
+    @include flex-all-center(space-between);
     li {
         margin-left: 20px;
         @include header-nav-text($mainfFontColor);
@@ -99,7 +99,7 @@
 }
 
 .header__nav-actions {
-    @include flex-all-center;
+    @include flex-all-center(space-between);
     * {
         margin-left: 6px;
     }

@@ -1,0 +1,57 @@
+.filter-menu {
+    padding: 20px 0;
+    @include flex-all-center(space-between);
+}
+.filter-menu__group {
+    @include flex-all-center(space-between);
+}
+
+.filter-menu__link-icon {
+    margin-right: 5px;
+}
+
+.filter-menu__group-item {
+    margin-right: 20px;
+}
+
+.filter-menu__group-item--line {
+    color: $infoFontColor;
+}
+
+.filter-menu__link {
+    @include header-nav-text($mainfFontColor);
+    @include grey-link-border($linkBorderBG);
+    @include menu-item-hover($logoColor);
+}
+.filter-menu__filters {
+    * {
+        margin-right: 15px;
+    }
+    &:last-child{
+        margin-right: 0;
+    } 
+}
+
+.filter-menu__select-name {
+    margin-right: 5px;
+    @include header-nav-text($mainfFontColor);
+}
+
+.filter-menu__select {
+    border: none;
+    @include grey-link-border($linkBorderBG);
+    option {
+        background-color: $linkBorderBG;
+    }
+}
+.filter-menu__filters-btn {
+    margin-left: 20px;
+    border: none;
+    @include grey-link-border($linkBorderBG);
+    * {
+        margin-left: 5px;
+    }
+    &:last-child {
+        margin-left: 0;
+    }
+}

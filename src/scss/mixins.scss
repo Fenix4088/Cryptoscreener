@@ -22,9 +22,9 @@
 }
 
 // * Common mixins
-@mixin flex-all-center {
+@mixin flex-all-center($space) {
     display: flex;
-    justify-content: space-between;
+    justify-content: $space;
     align-items: center;
 }
 
@@ -42,6 +42,22 @@
     &:hover {
         color: $color;
     }
+}
+
+// * Borders
+@mixin grey-link-border($color) {
+    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 8px;
+    height: 32px;
+    background-color: $color;
+    transition: all .2s ease;
+
+    &:hover {
+        background-color: darken($color, 10);
+    }
+        
 }
     
 
