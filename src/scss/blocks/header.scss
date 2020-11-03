@@ -90,6 +90,7 @@
     li {
         margin-left: 20px;
         @include header-nav-text($mainfFontColor);
+        @include menu-item-hover($logoColor);
         cursor: pointer;
         &:first-child {
             margin-left: 0;
@@ -99,6 +100,9 @@
 
 .header__nav-actions {
     @include flex-all-center;
+    * {
+        margin-left: 6px;
+    }
 }
 
 .header__nav-actions-search {
@@ -113,12 +117,12 @@
 
 .header__nav-actions-input-group {
     position: relative;
+
 }
 
 .header__nav-actions-search-icon {
     position: absolute;
     top: 50%;
-    // right: 50%;
     transform: translate(-150%, -50%);
 }
 
