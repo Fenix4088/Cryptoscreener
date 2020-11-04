@@ -127,48 +127,67 @@
                 </div>
                 <!-- !Table -->
                 <section id="content">
-    
-                    <div class="currency-table--wrapper">
-                        <table class="currency-table">
-                            <thead class="currency-table__head">
-                                <tr>
-                                    <th></th>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>24h</th>
-                                    <th>7d</th>
-                                    <th>Market Cap</th>
-                                    <th>Volume</th>
-                                    <th>Circulating Supply</th>
-                                </tr>
-                            </thead>
-                            <tbody class="currency-table__body">
-                                <tr>
-                                    <td><i class="far fa-eye"></i></td>
-                                    <td class="currency-table__id">1</td>
-                                    <td class="currency-table__name-data">
-                                        <img class="currency-table__logo" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png" alt="bitcoin icon">
-                                        <span class="currency-table__name">Bitcoin</span>
-                                        <span class="currency-table__symbol">BTC</span>
-                                    </td>
-                                    <td class="currency-table__price">$13,521.31</td>
-                                    <td class="currency-table__hour-percent">0.02%</td>
-                                    <td class="currency-table__week-percent">1.9%</td>
-                                    <td class="currency-table__cap">$250,584,661,696</td>
-                                    <td class="currency-table__vol">
-                                        <span class="currency-table__vol-fiat">$30,967,727,117</span>
-                                        <span class="currency-table__vol-crypto">2,290,290 BTC</span>
-                                    </td>
-                                    <td class="currency-table__circulating-supply">
-                                        <span class="currency-table__supply-crypto">18,532,568 BTC</span>
-                                        <div class="currency-table__supply-line">-------</div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-    
+                    <table class="currency-table">
+                        <thead class="currency-table__head">
+                            <tr class="table-row">
+                                <th></th>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>24h</th>
+                                <th>7d</th>
+                                <th>
+                                    <span class="currency-table__head-headerData-title">Market Cap</span>
+                                    <i class="fas fa-info-circle"></i>
+                                </th>
+                                <th>
+                                    <span class="currency-table__head-headerData-title">Volume</span>
+                                    <i class="fas fa-info-circle"></i>
+                                </th>
+                                <th>
+                                    <span class="currency-table__head-headerData-title">Circulating Supply</span>
+                                    <i class="fas fa-info-circle"></i>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="currency-table__body">
+                            <tr class="table-row">
+                                <td class="table-cell">
+                                    <i class="far fa-eye fa-eye-table"></i>
+                                </td>
+                                <td class="table-cell">1</td>
+                                <td class="table-cell currency-table__body-name">
+                                    <img class="currency-table__logo" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png" alt="bitcoin icon">
+                                    <span class="currency-table__name">Bitcoin</span>
+                                    <span class="currency-table__symbol">BTC</span>
+                                </td>
+                                <td class="table-cell currency-table__price">$13,521.31</td>
+                                <td class="table-cell currency-table__hour-percent">
+                                    <div class="table-arrow">
+                                        <i class="fas fa-caret-up"></i>
+                                        <span class="table-percents">0.02%</span>
+                                    </div>
+                                </td>
+                                <td class="table-cell currency-table__week-percent">
+                                    <div class="table-arrow down">
+                                        <i class="fas fa-caret-up"></i>
+                                        <span class="table-percents down">1.9%</span>
+                                    </div>
+                                </td>
+                                <td class="table-cell currency-table__cap">$250,584,661,696</td>
+                                <td class="table-cell currency-table__vol">
+                                    <span class="currency-table__vol-fiat">$30,967,727,117</span>
+                                    <span class="currency-table__vol-crypto">2,290,290 BTC</span>
+                                </td>
+                                <td class="table-cell currency-table__circulating-supply">
+                                    <div class="currency-table__supply-crypto">18,532,568 BTC</div>
+                                    <div class="currency-table__supply-line">
+                                        <div class="currency-table__supply-line-inner" style='width: 142px'></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
                 <!-- //!Table -->
             </div>

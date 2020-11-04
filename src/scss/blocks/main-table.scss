@@ -1,42 +1,79 @@
-.currency-table--wrapper {
-}
 .currency-table {
+    width: 100%;
+    border-collapse: collapse;
 }
-.currency-table__head {
+
+.table-row {
+    border: $mainTableBorder;
+    th {
+        padding: 10px;
+    }
 }
-.currency-table__body {
+
+.table-cell {
+    padding: 10px;
+    text-align: center;
 }
-.far {
+
+.currency-table__head-headerData-title {
+    margin-right: 5px;
 }
-.fa-eye {
-}
-.currency-table__id {
-}
-.currency-table__name-data {
-}
+
 .currency-table__logo {
+    width: 24px;
 }
-.currency-table__name {
+
+.currency-table__body-name {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    * {
+        margin-right: 5px;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
 }
-.currency-table__symbol {
+
+.table-arrow {
+    color: $increaseColor;
 }
-.currency-table__price {
+
+.table-arrow.down {
+    color: $decreaseColor;
+    i {
+        transform: rotate(180deg);
+    }
 }
-.currency-table__hour-percent {
-}
-.currency-table__week-percent {
-}
-.currency-table__cap {
-}
+
 .currency-table__vol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column nowrap;
 }
-.currency-table__vol-fiat {
-}
-.currency-table__vol-crypto {
-}
+
 .currency-table__circulating-supply {
 }
+
 .currency-table__supply-crypto {
+    margin-bottom: 10px;
 }
+
 .currency-table__supply-line {
+    width: 160px;
+    height: 6px;
+    position: relative;
+    border-radius: 3px;
+    background-color: $linkBorderBG;
+}
+
+.currency-table__supply-line-inner {
+    height: 6px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 3px;
+    background: $additionalInfoColor;
 }

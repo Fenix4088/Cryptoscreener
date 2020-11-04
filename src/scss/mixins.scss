@@ -28,6 +28,12 @@
     align-items: center;
 }
 
+@mixin flexable-flex($justify-content, $align-items, $flex-flow-direction, $flex-flow-wrap) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+    flex-flow: $flex-flow-direction, $flex-flow-wrap;
+}
 // * Hovers
 @mixin social-icons-hover($color) {
     transition: all .5s ease-in;
