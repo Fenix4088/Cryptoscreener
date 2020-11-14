@@ -1,0 +1,44 @@
+.item-wrapper {
+    @include flexable-flex(space-between, flex-start, row, nowrap);
+}
+
+.item__title {
+    @include flexable-flex(space-between, center, row, nowrap);
+    * {
+        margin-right: 12px;
+    }
+}
+
+.item__title-logo {
+}
+
+.item__title-name {
+    @include main-font-bold(30px);
+}
+.item__title-symbol {
+}
+
+.item-information {
+
+}
+
+.item__mainInfo-wrapper {
+}
+.item__mainInfo-price {
+}
+.item__mainInfo-percents {
+}
+.item__mainInfo-supply {
+}
+.item__infoBtn-wrapper {
+}
+.item__infoBtn-share {
+}
+.item__infoBtn-watch {
+}
+.item__info {
+}
+.item__info-list {
+}
+.item__info-list-elem {
+}

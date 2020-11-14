@@ -19,10 +19,6 @@
     margin-right: 5px;
 }
 
-.currency-table__logo {
-    width: 24px;
-}
-
 .currency-table__body-name {
     display: flex;
     align-items: flex-end;
@@ -52,6 +48,10 @@
     align-items: center;
     justify-content: center;
     flex-flow: column nowrap;
+}
+
+.currency-table__vol-crypto {
+    @include header-info-text($infoFontColor);
 }
 
 .currency-table__circulating-supply {

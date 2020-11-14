@@ -81,7 +81,9 @@
                         <div class="header__nav-actions-input-group">
                             <input class="header__nav-actions-search" type="text" placeholder="Search" />
                             <span class="header__nav-actions-search-icon">
-                                <svg width="15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg>
+                                <svg width="15px" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                                </svg>
                             </span>
                         </div>
                         <a href="#">
@@ -97,7 +99,9 @@
 
         <main id="main">
             <div class="container">
-                <div class="filter-menu">
+                <div class="" id="content">
+                <!-- !Table -->
+                <!-- <div class="filter-menu">
                     <div class="filter-menu__group ">
                         <a class="filter-menu__link filter-menu__group-item" href="#">
                             <span class="filter-menu__link-icon">
@@ -125,7 +129,6 @@
                         </button>
                     </div>
                 </div>
-                <!-- !Table -->
                 <section id="content">
                     <table class="currency-table">
                         <thead class="currency-table__head">
@@ -151,46 +154,131 @@
                             </tr>
                         </thead>
                         <tbody class="currency-table__body">
-                            <tr class="table-row">
-                                <td class="table-cell">
-                                    <i class="far fa-eye fa-eye-table"></i>
-                                </td>
-                                <td class="table-cell">1</td>
-                                <td class="table-cell currency-table__body-name">
-                                    <img class="currency-table__logo" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png" alt="bitcoin icon">
-                                    <span class="currency-table__name">Bitcoin</span>
-                                    <span class="currency-table__symbol">BTC</span>
-                                </td>
-                                <td class="table-cell currency-table__price">$13,521.31</td>
-                                <td class="table-cell currency-table__hour-percent">
-                                    <div class="table-arrow">
-                                        <i class="fas fa-caret-up"></i>
-                                        <span class="table-percents">0.02%</span>
-                                    </div>
-                                </td>
-                                <td class="table-cell currency-table__week-percent">
-                                    <div class="table-arrow down">
-                                        <i class="fas fa-caret-up"></i>
-                                        <span class="table-percents down">1.9%</span>
-                                    </div>
-                                </td>
-                                <td class="table-cell currency-table__cap">$250,584,661,696</td>
-                                <td class="table-cell currency-table__vol">
-                                    <span class="currency-table__vol-fiat">$30,967,727,117</span>
-                                    <span class="currency-table__vol-crypto">2,290,290 BTC</span>
-                                </td>
-                                <td class="table-cell currency-table__circulating-supply">
-                                    <div class="currency-table__supply-crypto">18,532,568 BTC</div>
-                                    <div class="currency-table__supply-line">
-                                        <div class="currency-table__supply-line-inner" style='width: 142px'></div>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
+                                <tr class="table-row">
+                                    <td class="table-cell">
+                                        <i class="far fa-eye fa-eye-table"></i>
+                                    </td>
+                                    <td class="table-cell">1</td>
+                                    <td class="table-cell currency-table__body-name">
+                                        <img class="currency-logo" src="https://cryptoicons.org/api/icon/btc/200" alt="bitcoin icon">
+                                        <span class="currency-table__name">Bitcoin</span>
+                                        <span class="currency-table__symbol">BTC</span>
+                                    </td>
+                                    <td class="table-cell currency-table__price">$13,521.31</td>
+                                    <td class="table-cell currency-table__hour-percent">
+                                        <div class="table-arrow">
+                                            <i class="fas fa-caret-up"></i>
+                                            <span class="table-percents">0.02%</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell currency-table__week-percent">
+                                        <div class="table-arrow down">
+                                            <i class="fas fa-caret-up"></i>
+                                            <span class="table-percents down">1.9%</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell currency-table__cap">$250,584,661,696</td>
+                                    <td class="table-cell currency-table__vol">
+                                        <span class="currency-table__vol-fiat">$30,967,727,117</span>
+                                        <span class="currency-table__vol-crypto">2,290,290 BTC</span>
+                                    </td>
+                                    <td class="table-cell currency-table__circulating-supply">
+                                        <div class="currency-table__supply-crypto">18,532,568 BTC</div>
+                                        <div class="currency-table__supply-line">
+                                            <div class="currency-table__supply-line-inner" style='width: 142px'></div>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="table-cell">
+                                        <i class="far fa-eye fa-eye-table"></i>
+                                    </td>
+                                    <td class="table-cell">1</td>
+                                    <td class="table-cell currency-table__body-name">
+                                        <img class="currency-logo" src="https://cryptoicons.org/api/icon/btc/200" alt="bitcoin icon">
+                                        <span class="currency-table__name">Bitcoin</span>
+                                        <span class="currency-table__symbol">BTC</span>
+                                    </td>
+                                    <td class="table-cell currency-table__price">$13,521.31</td>
+                                    <td class="table-cell currency-table__hour-percent">
+                                        <div class="table-arrow">
+                                            <i class="fas fa-caret-up"></i>
+                                            <span class="table-percents">0.02%</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell currency-table__week-percent">
+                                        <div class="table-arrow down">
+                                            <i class="fas fa-caret-up"></i>
+                                            <span class="table-percents down">1.9%</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell currency-table__cap">$250,584,661,696</td>
+                                    <td class="table-cell currency-table__vol">
+                                        <span class="currency-table__vol-fiat">$30,967,727,117</span>
+                                        <span class="currency-table__vol-crypto">2,290,290 BTC</span>
+                                    </td>
+                                    <td class="table-cell currency-table__circulating-supply">
+                                        <div class="currency-table__supply-crypto">18,532,568 BTC</div>
+                                        <div class="currency-table__supply-line">
+                                            <div class="currency-table__supply-line-inner" style='width: 142px'></div>
+                                    </td>
+                                </tr>
                     </table>
-                </section>
+                </section> -->
                 <!-- //!Table -->
+
+                <!-- ! Item Page -->
+                    <div class="item-wrapper">
+                        <div class="item__title">
+                            <span class="item__title-logo">
+                                <img class="currency-logo-32" src="https://cryptoicons.org/api/icon/btc/200" alt="bitcoin icon">
+                            </span>
+                            <span class="item__title-name">Bitcoin</span>
+                            <span class="item__title-symbol">BTC</span>
+                        </div>
+                        <div class="item-information">
+                            <div class="item__mainInfo-wrapper">
+                                <div class="item__mainInfo-price">
+                                    $15 960,38 USD
+                                    <span class="item__mainInfo-percents">(-0,94%)</span>
+                                </div>
+                                <div class="item__mainInfo-supply">
+                                    21000000 BTC
+                                </div>
+                                <div class="item__infoBtn-wrapper">
+                                    <div class="item__infoBtn-share">Share</div>
+                                    <div class="item__infoBtn-watch">Watch</div>
+                                </div>
+                            </div>
+                            <div class="item__info">
+                                <ul class="item__info-list">
+                                    <li class="item__info-list-elem">
+                                        <h5>Market Cap</h5>
+                                        <span>$295 879 422 465 USD</span>
+                                        <span>18 538 368 BTC</span>
+                                    </li>
+                                    <li class="item__info-list-elem">
+                                        <h5>Volume (24h)</h5>
+                                        <span>$26 647 761 312 USD</span>
+                                        <span>1 669 619 BTC</span>
+                                    </li>
+                                    <li class="item__info-list-elem">
+                                        <h5>Circulating Supply</h5>
+                                        <span>18 538 368 BTC</span>
+                                    </li>
+                                    <li class="item__info-list-elem">
+                                        <h5>Max Supply</h5>
+                                        <span>21 000 000 BTC</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                <!-- ! // Item Page -->
+                </div>
             </div>
         </main>
+        
+        <script src="./js/main.js"></script>
     <script src="js/babelpolyfill.bundle.js"></script><script src="js/index.bundle.js"></script></body>
 </html>
