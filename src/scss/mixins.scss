@@ -21,6 +21,12 @@
     color: $color;
 }
 
+@mixin additional-font-big($color) {
+    color: $color;
+    font-size: 17px;
+    font-weight: 600;
+}
+
 @mixin logo-style {
     font-family: 'Bangers', cursive;
     font-size: 25px;
@@ -70,6 +76,24 @@
         background-color: darken($color, 10);
     }
         
+}
+
+// * BTNs
+
+@mixin item-trigger-btn {
+    @include flexable-flex(flex-start, center, row, nowrap);
+    height: 35px;
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 1px solid rgb(193, 204, 217);
+    box-shadow: rgb(228, 231, 235) 0px 1px 1px 0px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 12px;
+    padding: 10px;
+    white-space: nowrap;
 }
     
 

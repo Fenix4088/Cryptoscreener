@@ -3,7 +3,7 @@
 }
 
 .item__title {
-    @include flexable-flex(space-between, center, row, nowrap);
+    @include flexable-flex(space-between, flex-end, row, nowrap);
     * {
         margin-right: 12px;
     }
@@ -16,29 +16,79 @@
     @include main-font-bold(30px);
 }
 .item__title-symbol {
+    @include additional-font-big($additionalFontGrey);
 }
 
 .item-information {
-
+    margin-top: 5px;
+    @include flexable-flex(space-between, flex-start, column, nowrap);
 }
 
 .item__mainInfo-wrapper {
+    margin-bottom: 25px;
 }
+
 .item__mainInfo-price {
+    margin-bottom: 5px;
+    @include main-font-bold(25px);
 }
+
+.item__mainInfo-fiat {
+    @include main-font-bold(20px);
+
+}
+
 .item__mainInfo-percents {
+    color: $increaseColor;
+    font-weight: 500;
+    font-size: 25px;
 }
+
+.item__mainInfo-percents.down {
+    color: $decreaseColor;
+}
+
 .item__mainInfo-supply {
+    margin-bottom: 15px;
+    @include additional-font-big($additionalFontGrey);
 }
+
 .item__infoBtn-wrapper {
+    @include flexable-flex(flex-start, center, row, nowrap);
 }
-.item__infoBtn-share {
-}
+.item__infoBtn-share,
 .item__infoBtn-watch {
+    margin-right: 15px;
+    @include item-trigger-btn;
+    i {
+        margin-right: 5px;
+    }
+    &:last-child{
+        margin-right: 0;
+    }
+    &:hover {
+        color: $hover-blue;
+    }
 }
+
 .item__info {
 }
+
 .item__info-list {
+    @include flexable-flex(space-between, flex-start, row, nowrap);
 }
+
 .item__info-list-elem {
+    width: 25%;
+    h5 {
+        background: #f5f7f8;
+        border-bottom: 1px solid rgb(225, 229, 234);
+        color: $main-font-bold;
+        padding: 12px 12px 11px;
+        font-size: 15px;
+        line-height: 24px;
+        margin-top: 0px;
+        margin-bottom: 12px;
+        font-weight: 600;
+    }
 }
