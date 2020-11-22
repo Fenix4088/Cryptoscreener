@@ -75,10 +75,11 @@
 }
 
 .item__info-list {
-    @include flexable-flex(space-between, flex-start, row, nowrap);
+    @include flexable-flex(space-between, flex-start, row, wrap);
 }
 
 .item__info-list-elem {
+    margin-bottom: 15px;
     width: 25%;
     h5 {
         background: #f5f7f8;
@@ -90,5 +91,15 @@
         margin-top: 0px;
         margin-bottom: 12px;
         font-weight: 600;
+    }
+
+    span:first-of-type {
+        color: $main-font-bold;
+        font-weight: 600;
+    }
+    
+    span:nth-of-type(2) {
+        color: $additionalFontGrey;
+        font-weight: 400;
     }
 }

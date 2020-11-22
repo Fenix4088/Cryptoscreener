@@ -1,6 +1,50 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"index": 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "js/" + ({"error404-index-js":"error404-index-js","itemPage-index-js":"itemPage-index-js","mainTable-index-js":"mainTable-index-js"}[chunkId]||chunkId) + ".bundle.js"
+/******/ 	}
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -26,6 +70,67 @@
 /******/ 		return module.exports;
 /******/ 	}
 /******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
 /******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
@@ -78,6 +183,16 @@
 /******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
 /******/
 /******/ 	// Load entry module and return exports
@@ -503,7 +618,42 @@ eval("var api = __webpack_require__(/*! ../../node_modules/style-loader/dist/run
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../scss/main.scss */ \"./src/scss/main.scss\");\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_1__);\n\n\n\n//# sourceURL=webpack:///./src/js/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/main.css */ \"./src/css/main.css\");\n/* harmony import */ var _css_main_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_css_main_css__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../scss/main.scss */ \"./src/scss/main.scss\");\n/* harmony import */ var _scss_main_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_scss_main_scss__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _router_index_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router/index.js */ \"./src/js/router/index.js\");\n\n\n\nvar router = _router_index_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].instance();\nrouter.addRoute(/^$/, \"mainTable\").addRoute(/^itemPage(\\/[\\w()-]+)?$/, \"itemPage\").addRoute(/^404\\/?$/, 'error404').setNotFoundPagePath('error404').listen();\n\n//# sourceURL=webpack:///./src/js/main.js?");
+
+/***/ }),
+
+/***/ "./src/js/router/index.js":
+/*!********************************!*\
+  !*** ./src/js/router/index.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"default\", function() { return Router; });\n/* harmony import */ var _render_page_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./render-page.js */ \"./src/js/router/render-page.js\");\nfunction _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === \"undefined\" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === \"number\") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError(\"Invalid attempt to iterate non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it[\"return\"] != null) it[\"return\"](); } finally { if (didErr) throw err; } } }; }\n\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\n\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }\n\nfunction asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err); } _next(undefined); }); }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\nvar Router = /*#__PURE__*/function () {\n  function Router() {\n    _classCallCheck(this, Router);\n\n    this.routes = [];\n    this.initEventListeners();\n  }\n\n  _createClass(Router, [{\n    key: \"initEventListeners\",\n    value: function initEventListeners() {\n      var _this = this;\n\n      document.addEventListener(\"click\", function (event) {\n        var link = event.target.closest('a');\n        if (!link) return;\n        var href = link.getAttribute('href');\n\n        if (href && href.startsWith('/')) {\n          event.preventDefault();\n\n          _this.navigate(href);\n        }\n      });\n    }\n  }, {\n    key: \"navigate\",\n    value: function navigate(path) {\n      history.pushState(null, null, path);\n      this.route();\n    }\n  }, {\n    key: \"route\",\n    value: function () {\n      var _route = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {\n        var strippedPath, match, _iterator, _step, _route2;\n\n        return regeneratorRuntime.wrap(function _callee$(_context) {\n          while (1) {\n            switch (_context.prev = _context.next) {\n              case 0:\n                strippedPath = decodeURI(window.location.pathname).replace(/^\\/|\\/$/, '');\n                _iterator = _createForOfIteratorHelper(this.routes);\n                _context.prev = 2;\n\n                _iterator.s();\n\n              case 4:\n                if ((_step = _iterator.n()).done) {\n                  _context.next = 15;\n                  break;\n                }\n\n                _route2 = _step.value;\n                match = strippedPath.match(_route2.pattern);\n\n                if (!match) {\n                  _context.next = 12;\n                  break;\n                }\n\n                _context.next = 10;\n                return this.changePage(_route2.path, match);\n\n              case 10:\n                this.page = _context.sent;\n                return _context.abrupt(\"break\", 15);\n\n              case 12:\n                ;\n\n              case 13:\n                _context.next = 4;\n                break;\n\n              case 15:\n                _context.next = 20;\n                break;\n\n              case 17:\n                _context.prev = 17;\n                _context.t0 = _context[\"catch\"](2);\n\n                _iterator.e(_context.t0);\n\n              case 20:\n                _context.prev = 20;\n\n                _iterator.f();\n\n                return _context.finish(20);\n\n              case 23:\n                if (match) {\n                  _context.next = 27;\n                  break;\n                }\n\n                _context.next = 26;\n                return this.changePage(this.notFoundPagePath);\n\n              case 26:\n                this.page = _context.sent;\n\n              case 27:\n                ;\n                document.dispatchEvent(new CustomEvent('route', {\n                  detail: {\n                    page: this.page\n                  }\n                }));\n\n              case 29:\n              case \"end\":\n                return _context.stop();\n            }\n          }\n        }, _callee, this, [[2, 17, 20, 23]]);\n      }));\n\n      function route() {\n        return _route.apply(this, arguments);\n      }\n\n      return route;\n    }()\n  }, {\n    key: \"addRoute\",\n    value: function addRoute(pattern, path) {\n      this.routes.push({\n        pattern: pattern,\n        path: path\n      });\n      return this;\n    }\n  }, {\n    key: \"changePage\",\n    value: function () {\n      var _changePage = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(path, match) {\n        return regeneratorRuntime.wrap(function _callee2$(_context2) {\n          while (1) {\n            switch (_context2.prev = _context2.next) {\n              case 0:\n                if (this.page && this.page.destroy) {\n                  this.page.destroy();\n                }\n\n                _context2.next = 3;\n                return Object(_render_page_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(path, match);\n\n              case 3:\n                return _context2.abrupt(\"return\", _context2.sent);\n\n              case 4:\n              case \"end\":\n                return _context2.stop();\n            }\n          }\n        }, _callee2, this);\n      }));\n\n      function changePage(_x, _x2) {\n        return _changePage.apply(this, arguments);\n      }\n\n      return changePage;\n    }()\n  }, {\n    key: \"setNotFoundPagePath\",\n    value: function setNotFoundPagePath(path) {\n      this.notFoundPagePath = path;\n      return this;\n    }\n  }, {\n    key: \"listen\",\n    value: function listen() {\n      var _this2 = this;\n\n      window.addEventListener(\"popstate\", function () {\n        return _this2.route();\n      });\n      this.route();\n    }\n  }], [{\n    key: \"instance\",\n    value: function instance() {\n      if (!this._instance) {\n        this._instance = new Router();\n      }\n\n      return this._instance;\n    }\n  }]);\n\n  return Router;\n}();\n\n\n\n//# sourceURL=webpack:///./src/js/router/index.js?");
+
+/***/ }),
+
+/***/ "./src/js/router/render-page.js":
+/*!**************************************!*\
+  !*** ./src/js/router/render-page.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nfunction asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }\n\nfunction _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"next\", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, \"throw\", err); } _next(undefined); }); }; }\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (function (_x, _x2) {\n  return _ref.apply(this, arguments);\n});\n\nfunction _ref() {\n  _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(path, match) {\n    var _yield$import, Page, page, element, appContainer;\n\n    return regeneratorRuntime.wrap(function _callee$(_context) {\n      while (1) {\n        switch (_context.prev = _context.next) {\n          case 0:\n            _context.next = 2;\n            return __webpack_require__(\"./src/pages lazy recursive ^\\\\.\\\\/.*\\\\/index\\\\.js$\")(\"./\".concat(path, \"/index.js\"));\n\n          case 2:\n            _yield$import = _context.sent;\n            Page = _yield$import[\"default\"];\n            page = new Page(match);\n            _context.next = 7;\n            return page.render();\n\n          case 7:\n            element = _context.sent;\n            appContainer = document.querySelector(\"#content\");\n            appContainer.innerHTML = \"\";\n            appContainer.append(element);\n            return _context.abrupt(\"return\", page);\n\n          case 12:\n          case \"end\":\n            return _context.stop();\n        }\n      }\n    }, _callee);\n  }));\n  return _ref.apply(this, arguments);\n}\n\n//# sourceURL=webpack:///./src/js/router/render-page.js?");
+
+/***/ }),
+
+/***/ "./src/pages lazy recursive ^\\.\\/.*\\/index\\.js$":
+/*!*************************************************************!*\
+  !*** ./src/pages lazy ^\.\/.*\/index\.js$ namespace object ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("var map = {\n\t\"./error404/index.js\": [\n\t\t\"./src/pages/error404/index.js\",\n\t\t\"error404-index-js\"\n\t],\n\t\"./itemPage/index.js\": [\n\t\t\"./src/pages/itemPage/index.js\",\n\t\t\"itemPage-index-js\"\n\t],\n\t\"./mainTable/index.js\": [\n\t\t\"./src/pages/mainTable/index.js\",\n\t\t\"mainTable-index-js\"\n\t]\n};\nfunction webpackAsyncContext(req) {\n\tif(!__webpack_require__.o(map, req)) {\n\t\treturn Promise.resolve().then(function() {\n\t\t\tvar e = new Error(\"Cannot find module '\" + req + \"'\");\n\t\t\te.code = 'MODULE_NOT_FOUND';\n\t\t\tthrow e;\n\t\t});\n\t}\n\n\tvar ids = map[req], id = ids[0];\n\treturn __webpack_require__.e(ids[1]).then(function() {\n\t\treturn __webpack_require__(id);\n\t});\n}\nwebpackAsyncContext.keys = function webpackAsyncContextKeys() {\n\treturn Object.keys(map);\n};\nwebpackAsyncContext.id = \"./src/pages lazy recursive ^\\\\.\\\\/.*\\\\/index\\\\.js$\";\nmodule.exports = webpackAsyncContext;\n\n//# sourceURL=webpack:///./src/pages_lazy_^\\.\\/.*\\/index\\.js$_namespace_object?");
 
 /***/ }),
 
