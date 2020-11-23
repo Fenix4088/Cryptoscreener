@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
 module.exports = {
+  devtool: 'eval-cheap-module-source-map', 
     entry: {
         babelpolyfill: '@babel/polyfill',
         index: './src/js/main.js'
@@ -85,7 +86,12 @@ module.exports = {
             options: {
               name: '[name].[ext]',
             },
-          }
+          },
+          {
+            test: /\.js$/,
+            enforce: 'pre',
+            use: ['source-map-loader'],
+          },
         ]
       }
       
