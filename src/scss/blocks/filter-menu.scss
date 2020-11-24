@@ -44,6 +44,7 @@
         background-color: $linkBorderBG;
     }
 }
+
 .filter-menu__filters-btn {
     margin-left: 20px;
     border: none;
@@ -55,3 +56,36 @@
         margin-left: 0;
     }
 }
+// !Hidden filter list
+.filters {
+    padding: 0 0 16px 0;
+    &.hidden {
+        display: none;
+    }
+}
+
+.filters__list {
+    @include flexable-flex(flex-start, center, row, nowrap)
+}
+
+.filters__list-item {
+    margin-right: 5px;
+    &:last-child{
+        margin-right: 0;
+    } 
+}
+
+.filters__list-btn {
+    border: none;
+    // @include flexable-flex(center, center, row, nowrap);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include header-nav-text($mainfFontColor);
+    @include grey-link-border($linkBorderBG);
+    @include menu-item-hover($logoColor);
+    svg {
+        margin-right: 5px;
+    }
+}
+

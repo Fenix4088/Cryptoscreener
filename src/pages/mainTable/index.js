@@ -1,23 +1,23 @@
 export default class Page {
-    element;
-    subElements = {};
-    constructor(match) {
-        this.match = match;
-    }
+  element;
+  subElements = {};
+  constructor(match) {
+    this.match = match;
+  }
 
-    render() {
-        const element = document.createElement('div');
-        element.innerHTML = this.template;
-        this.element = element.firstElementChild;
+  render() {
+    const element = document.createElement("div");
+    element.innerHTML = this.template;
+    this.element = element.firstElementChild;
 
-        this.subElements = this.getSubElements(this.element);
-        console.log(this.subElements);
+    this.subElements = this.getSubElements(this.element);
+    console.log(this.subElements);
 
-        return this.element;
-    }
+    return this.element;
+  }
 
-    get template() {
-        return `
+  get template() {
+    return `
         <div class="filter-menu">
         <div class="filter-menu__group ">
             <a class="filter-menu__link filter-menu__group-item" href="/itemPage" data-element="watchlistBtn">
@@ -48,17 +48,18 @@ export default class Page {
     </div>
         
         `;
-    }
+  }
 
-    getSubElements(element) {
-        const subElements = element.querySelectorAll('[data-element]');
-        return [...subElements].reduce((acc, next) => {
-            acc[next.dataset.element] = next;
-            return acc;
-        }, {});
-    }
+  getSubElements(element) {
+    const subElements = element.querySelectorAll("[data-element]");
+    return [...subElements].reduce((acc, next) => {
+      acc[next.dataset.element] = next;
+      return acc;
+    }, {});
 
-    destroy() {
-        console.log('Destroy page mainTable');
-    }
+  }
+
+  destroy() {
+    console.log("Destroy page mainTable");
+  }
 }

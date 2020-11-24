@@ -5,8 +5,15 @@
 
 .table-row {
     border: $mainTableBorder;
+    border-left: none;
+    border-right: none;
+    transition: all .2s ease;
     th {
         padding: 10px;
+    }
+
+    &:hover {
+        background-color: $main-table-hover;
     }
 }
 
