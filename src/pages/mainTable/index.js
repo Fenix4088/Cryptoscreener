@@ -1,9 +1,9 @@
+import SortableTable from "../../js/components/sortableTable/index.js";
+
 export default class Page {
   element;
   subElements = {};
-  constructor(match) {
-    this.match = match;
-  }
+  components = {};
 
   render() {
     const element = document.createElement("div");
@@ -11,43 +11,40 @@ export default class Page {
     this.element = element.firstElementChild;
 
     this.subElements = this.getSubElements(this.element);
-    console.log(this.subElements);
+
+    this.initComponents();
+    this.renderComponent();
 
     return this.element;
   }
 
+  renderComponent() {
+    Object.keys(this.components).forEach(component => {
+      const root = this.subElements[component];
+      const { element } = this.components[component];
+      root.append(element);
+    });
+  }
+
   get template() {
     return `
-        <div class="filter-menu">
-        <div class="filter-menu__group ">
-            <a class="filter-menu__link filter-menu__group-item" href="/itemPage" data-element="watchlistBtn">
-                <span class="filter-menu__link-icon">
-                    <i class="fas fa-eye"></i>
-                </span>
-                <div>Watchlist</div> 
-            </a>
-            <div class="filter-menu__group-item filter-menu__group-item--line">|</div>
-            <a class="filter-menu__link filter-menu__group-item" href="/" data-element="cryptocurrenciesBtn">
-                <div>Cryptocurrencies</div>
-            </a>
-        </div>
-        <div class="filter-menu__group filter-menu__filters">
-            <div class="filter-menu__select-wrapper">
-                <span class="filter-menu__select-name">Show rows</span>
-                <select class="filter-menu__select" data-element="showRowsSelect">
-                    <option value="">100</option>
-                    <option value="">50</option>
-                    <option value="">20</option>
-                </select>
-            </div>
-            <button class="filter-menu__filters-btn" data-element="filtersBtn">
-                <i class="fas fa-sliders-h"></i>
-                <span>Filters</span>
-            </button>
+    <div class="mainTablePage">
+        <div class="table-wrapper" data-element="sortableTable">
         </div>
     </div>
-        
         `;
+  }
+
+  initComponents() {
+    const sortableTable = new SortableTable();
+
+    this.saveComponents({ sortableTable });
+  }
+
+  saveComponents(componentsObj = {}) {
+    Object.keys(componentsObj).forEach(component => {
+      this.components[component] = componentsObj[component];
+    });
   }
 
   getSubElements(element) {
@@ -56,7 +53,6 @@ export default class Page {
       acc[next.dataset.element] = next;
       return acc;
     }, {});
-
   }
 
   destroy() {
