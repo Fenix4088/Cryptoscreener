@@ -26,16 +26,35 @@
     margin-right: 5px;
 }
 
-.currency-table__body-name {
+.currency-table__body-name a {
     display: flex;
     align-items: flex-end;
-    justify-content: center;
+    justify-content: flex-start;
     * {
         margin-right: 5px;
     }
 
     &:last-child {
         margin-right: 0;
+    }
+}
+
+.currency-table__symbol {
+    color: $additionalFontColor;
+    font-weight: 600;
+}
+
+.currency-table__price {
+    text-align: right;
+}
+
+.table-arrow, .table-arrow.down {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    i {
+        align-self: start;
+        margin-right: 5px;
     }
 }
 
@@ -50,11 +69,15 @@
     }
 }
 
+.currency-table__cap {
+    text-align: left;
+}
+
 .currency-table__vol {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-flow: column nowrap;
+    justify-content: flex-start;
+    // flex-flow: column nowrap;
 }
 
 .currency-table__vol-crypto {

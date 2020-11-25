@@ -35,9 +35,8 @@ export default class Page {
         `;
   }
 
-  initComponents() {
+  async initComponents() {
     const sortableTable = new SortableTable();
-
     this.saveComponents({ sortableTable });
   }
 
@@ -54,6 +53,7 @@ export default class Page {
       return acc;
     }, {});
   }
+
 
   destroy() {
     console.log("Destroy page mainTable");
