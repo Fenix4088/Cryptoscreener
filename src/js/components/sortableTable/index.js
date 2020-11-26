@@ -1,10 +1,57 @@
 import fetchJson from "../../utils/fetch-json.js";
+const path = "https://api.coincap.io";
 
 export default class SortableTable {
   element;
   subElements = {};
+  data = [];
+  watchlistArr = JSON.parse(localStorage.getItem("Watchlist")) || [];
   constructor() {
     this.render();
+  }
+
+  addEventListeners() {
+    console.log(this.subElements);
+    const { filtersBtn, mainTable } = this.subElements;
+    filtersBtn.addEventListener("pointerdown", this.onFilterBtnClick);
+    mainTable.addEventListener("pointerdown", this.onTableClick);
+  }
+
+  onFilterBtnClick = event => {
+    const { filteList } = this.subElements;
+    filteList.classList.toggle("hidden");
+    if (!event.target.classList.contains("active")) {
+      event.target.classList.add("active");
+    } else {
+      event.target.classList.remove("active");
+    }
+  };
+
+  onTableClick = event => {
+    const currentIcon = event.target.closest("[data-watchListIcon]");
+    const currencyId = currentIcon.closest('tr').dataset.watch;
+
+    if (currentIcon) {
+      if (!currentIcon.classList.contains("active")) {
+        currentIcon.classList.add("active");
+        this.saveToWatchlist(currencyId);
+      } else {
+        currentIcon.classList.remove("active");
+        this.removeFromWatchlist(currencyId);
+      }
+    }
+  };
+
+  saveToWatchlist(currencyId) {
+    const currencyObject = this.data.find(item => item.id === currencyId);
+    this.watchlistArr.push(currencyObject);
+    localStorage.setItem("Watchlist", JSON.stringify(this.watchlistArr));
+  }
+
+  removeFromWatchlist(currencyId) {
+    const currencyObjectId = this.watchlistArr.findIndex(item => item.id === currencyId);
+    this.watchlistArr.splice(currencyObjectId, 1);
+    localStorage.setItem("Watchlist", JSON.stringify(this.watchlistArr));
   }
 
   async render() {
@@ -17,6 +64,7 @@ export default class SortableTable {
     const { data } = await this.getTableData();
 
     this.addTableRows(data);
+    this.addEventListeners();
 
     return this.element;
   }
@@ -33,7 +81,16 @@ export default class SortableTable {
                 </a>
                 <div class="filter-menu__group-item filter-menu__group-item--line">|</div>
                 <a class="filter-menu__link filter-menu__group-item" href="/" data-element="cryptocurrenciesBtn">
+                    <span class="filter-menu__link-icon">
+                        <i class="fab fa-bitcoin"></i>
+                    </span>
                     <div>Cryptocurrencies</div>
+                </a>
+                <a class="filter-menu__link filter-menu__group-item" href="/" data-element="fiatBtn">
+                    <span class="filter-menu__link-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </span>
+                    <div>Fiat</div>
                 </a>
             </div>
             <div class="filter-menu__group filter-menu__filters">
@@ -149,6 +206,7 @@ export default class SortableTable {
   }
 
   addTableRows(data = []) {
+    this.data = data;
     const { tableBody } = this.subElements;
     const result = data
       .map(item => {
@@ -161,13 +219,13 @@ export default class SortableTable {
 
   createRow(element) {
     return `
-      <tr class="table-row">
+      <tr class="table-row" data-watch="${element.id}">
         <td class="table-cell">
-            <i class="far fa-eye fa-eye-table"></i>
+            <i class="far fa-eye fa-eye-table" data-watchListIcon></i>
         </td>
         <td class="table-cell">${element.rank}</td>
         <td class="table-cell currency-table__body-name">
-        <a href="/itemPage?${element.symbol.toLowerCase()}">
+        <a href="/itemPage?${element.id}">
                 <img class="currency-logo" src="./img/icons/cryptocurrency-icons/${element.symbol.toLowerCase()}.png" alt="N/A">
                 <span class="currency-table__name">${this.formatName(element.id)}</span>
                 <span class="currency-table__symbol">${element.symbol}</span>
@@ -236,6 +294,14 @@ export default class SortableTable {
   }
 
   async getTableData() {
-    return await fetchJson("https://api.coincap.io/v2/assets");
+    return await fetchJson(`${path}/v2/assets`);
+  }
+
+  remove() {
+    this.element.remove();
+  }
+
+  destroy() {
+    this.remove();
   }
 }

@@ -22,6 +22,7 @@
     text-align: center;
 }
 
+
 .currency-table__head-headerData-title {
     margin-right: 5px;
 }
@@ -74,17 +75,15 @@
 }
 
 .currency-table__vol {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    // flex-flow: column nowrap;
+
+    text-align: right;
+    * {
+        margin-right: 20px;
+    }
 }
 
 .currency-table__vol-crypto {
     @include header-info-text($infoFontColor);
-}
-
-.currency-table__circulating-supply {
 }
 
 .currency-table__supply-crypto {
